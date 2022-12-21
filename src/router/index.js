@@ -9,6 +9,8 @@ import Layout from '@/views/layout'
 import Home from '@/views/home'
 import Pictures from '@/views/pictures'
 import Articles from '@/views/articles'
+import AddArticle from '@/views/articles/add.vue'
+import EditArticle from '@/views/articles/edit.vue'
 import Page404 from '@/views/page404'
 
 Vue.use(VueRouter)
@@ -25,6 +27,9 @@ const router = new VueRouter({
             children:[
                 {path:'', component: Home},
                 {path:'/articles', component: Articles},
+                {path:'/add-article', component: AddArticle},
+                {path:'/edit-article/:id', component: EditArticle},
+
                 {path:'/pictures', component: Pictures}
             ]
         },
