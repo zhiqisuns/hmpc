@@ -56,8 +56,8 @@
                     <div class="right">
                         <el-dropdown>
                             <div class="avatar-wrap">
-                                <img src="@/assets/icon.jpg" alt="用户头像">
-                                <!-- <img src="user.photo" alt="用户头像"> -->
+                                <!-- <img src="@/assets/icon.jpg" alt="用户头像"> -->
+                                <img :src="user.photo" alt="用户头像">
                               <span>{{user.name}}</span>
                               <i class="el-icon-arrow-down el-icon--right"></i>
                             </div>
@@ -85,7 +85,7 @@ export default {
             isCollapse: false,
             user:{
                 name:'知七',
-                // photo:'@/assets/icon.jpg'
+                photo:''
             }
         }
     },
@@ -105,9 +105,19 @@ export default {
         }
     },
     created(){
+        console.log('chushuh')
         reqGetUserProfile().then(res=>{
             this.user=res.data.data
             console.log(res)
+            console.log(this.user)
+        }),
+        this.$eventBus.$on('update_user_photo',newName=>{
+            // 更新到数据项中
+            this.user.name = newName
+        }),
+        this.$eventBus.$on('update_user_photo', newPhoto => {
+            // 更新到数据项中
+            this.user.photo = newPhoto
         })
     }
     

@@ -10,7 +10,8 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
-
+// 全局事件总线
+Vue.prototype.$eventBus = new Vue()
 
 Vue.config.productionTip = false
 

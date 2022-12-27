@@ -19,10 +19,13 @@
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="频道">
+                <my-channels v-model="form.channel_id"></my-channels>
+              </el-form-item>
+              <!-- <el-form-item label="频道">
                 <el-select clearable v-model="form.channel_id" placeholder="请选择频道">
                   <el-option v-for="item in channels" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item label="日期">
                 <el-date-picker
                     v-model="form.date"
@@ -96,7 +99,8 @@
 
 <script>
 import MyBreadcrumb from '@/components/my-breadcrumb.vue'
-import { reqGetArticles , reqGetChannels} from '@/api/articles'
+import MyChannels from '@/components/my-channels.vue'
+import { reqGetArticles } from '@/api/articles'
 export default {
     // name: 'Articles',
     data(){
@@ -111,7 +115,6 @@ export default {
             articles: [],
             total_count:0,
             currentPage:1,  //当前页码
-            channels:[],
             // 筛选条件
             query:{
                 begin_pubdate: null, // 开始日期
@@ -122,7 +125,8 @@ export default {
         }
     },
     components:{
-        MyBreadcrumb
+        MyBreadcrumb,
+        MyChannels
     },
     methods:{
         //获取文章列表，created中调用
@@ -142,13 +146,6 @@ export default {
                 this.total_count = res.data.data.total_count
                 this.sum=this.articles.length
                 this.loading = false
-            })
-        },
-        // 获取频道
-        loadChannels(){
-            reqGetChannels().then(res => {
-                this.channels = res.data.data.channels
-                console.log('频道',res.data.data.channels)
             })
         },
         // 页面改变时触发函数
@@ -200,8 +197,7 @@ export default {
         }
     },
     created(){
-        this.loadArticles(),
-        this.loadChannels()
+        this.loadArticles()
     },
     mounted(){
         

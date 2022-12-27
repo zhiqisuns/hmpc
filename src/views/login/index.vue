@@ -65,7 +65,7 @@ export default {
                 this.$router.push('/s')
                 reqUserLogin(this.form.mobile,this.form.code).then(res =>{
                     this.$message.success('恭喜您登录成功')
-                    // localStorage.setItem('userInfo', JSON.stringify(res.data.data))
+                    localStorage.setItem('userInfo', JSON.stringify(res.data.data))
                     console.log('登录成功',res)
                 }).catch(err=>{
                     this.$message.error('登录失败，手机号或验证码错误')
